@@ -1,7 +1,8 @@
 import React from 'react';
-import {User} from './User'
-import {Main} from './Main'
+import {User} from '../Components/User'
+import {Main} from '../Components/Main'
 import { connect } from 'react-redux';
+import {setName} from '../Actions/userActions'
 class App extends React.Component{
     render(){
         return (
@@ -10,7 +11,7 @@ class App extends React.Component{
              <Main changeUsername ={()=>this.props.setName("AMAR")} />
              <User username={this.props.user.name}/>
              <div>{this.props.user.age}</div>
-             <div>{this.props.math.lastValues.map((val)=>(<div>{val}</div>))}</div>
+             <div>{this.props.math.lastValues.map((val,key)=>(<div key={key}>{val}</div>))}</div>
             </div>
         )
     }
@@ -25,10 +26,7 @@ const mapStateToProps =(state)=>{
 const mapDispatchToProps =(dispatch)=>{
     return {
         setName:(name)=>{
-            dispatch({
-                type:"SET_NAME",
-                payload:name
-            });
+            dispatch(setName(name));
         }
     }
 }
